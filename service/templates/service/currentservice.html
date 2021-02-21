@@ -1,0 +1,31 @@
+{% extends 'service/base.html' %}
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            {% if services %}
+                 <h1>{{ services.count }} Current service{{ services.count|pluralize }}</h1>
+            {% else %}
+                           <h1>Current services</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+    {% if services %}
+            <div class="list-group">
+        {% for service in services %}
+            <a href="{% url 'viewservice' service.id %}" class="list-group-item list-group-item-action{% if service.important %}list-group-item-danger{% endif %}"><b>{{ service.customer }}</b> {{ service.item }}</a> 
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="text-center">
+            <h2>உங்களிடம் எந்த சேவையும் இல்லை என்று தெரிகிறது! மகிழ்ச்சி!!</h2>
+        <br>
+        <a role="button" class="btn btn-primary" href="{% url 'createservice' %}">New service</a>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
